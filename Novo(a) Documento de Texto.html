@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cardápio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      position: relative;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    #lanches, #salgados {
+      width: 50%;
+      padding: 20px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    #lanches {
+      background: linear-gradient(to bottom, #cc0000, #990000);
+      color: white;
+      margin-right: 10px;
+    }
+
+    #salgados {
+      background: linear-gradient(to bottom, #ffcc33, #ff9900);
+      color: black;
+      margin-left: 10px;
+      position: relative;
+    }
+
+    h2 {
+      font-family: 'Lobster', cursive;
+      font-size: 42px;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .lanche-item, .salgado-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px dotted rgba(255, 255, 255, 0.6);
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+    }
+
+    .salgado-item {
+      border-bottom: 1px dotted rgba(0, 0, 0, 0.5);
+    }
+
+    .imagem-coxinhas {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 130px;
+      border-radius: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      #lanches, #salgados {
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      .imagem-coxinhas {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="lanches">
+      <h2>Lanches</h2>
+      <div class="lanche-item"><span>AMERICANO</span><span>R$ 41,00</span></div>
+      <div class="lanche-item"><span>AMERICANO FILÉ</span><span>R$ 45,90</span></div>
+      <div class="lanche-item"><span>BAURU</span><span>R$ 31,90</span></div>
+      <div class="lanche-item"><span>BAURU PRESUNTO</span><span>R$ 24,90</span></div>
+      <div class="lanche-item"><span>BAURU FILÉ</span><span>R$ 41,90</span></div>
+      <div class="lanche-item"><span>CHURRASCO</span><span>R$ 30,90</span></div>
+      <div class="lanche-item"><span>CHURRASCO FRANGO</span><span>R$ 30,90</span></div>
+      <div class="lanche-item"><span>CHURRASCO FILÉ</span><span>R$ 41,90</span></div>
+      <div class="lanche-item"><span>FRANGÃO / GIGANTÃO</span><span>R$ 43,90</span></div>
+      <div class="lanche-item"><span>GIGANTÃO FILÉ</span><span>R$ 47,20</span></div>
+      <div class="lanche-item"><span>MISTO QUENTE</span><span>R$ 19,90</span></div>
+      <div class="lanche-item"><span>PÃO COM OVO</span><span>R$ 13,50</span></div>
+      <div class="lanche-item"><span>PÃO NA CHAPA</span><span>R$ 9,40</span></div>
+      <div class="lanche-item"><span>QUEIJO QUENTE</span><span>R$ 18,90</span></div>
+      <div class="lanche-item"><span>X-BURGER</span><span>R$ 29,90</span></div>
+      <div class="lanche-item"><span>X-SALADA</span><span>R$ 31,90</span></div>
+      <div class="lanche-item"><span>X-BACON</span><span>R$ 31,90</span></div>
+    </div>
+
+    <div id="salgados">
+      <h2>Salgados</h2>
+      <div class="salgado-item"><span>COXINHA FRANGO / CARNE</span><span>R$ 13,60</span></div>
+      <div class="salgado-item"><span>BOLINHO DE CARNE</span><span>R$ 15,60</span></div>
+      <div class="salgado-item"><span>RISOLES DE PRES. E QUEIJO</span><span>R$ 13,60</span></div>
+      <div class="salgado-item"><span>KIBE</span><span>R$ 13,60</span></div>
+      <div class="salgado-item"><span>SALSICHA EMPANADA</span><span>R$ 13,60</span></div>
+      <div class="salgado-item"><span>BOLA DE QUEIJO</span><span>R$ 13,60</span></div>
+      <div class="salgado-item"><span>EMPADA PALMITO/FRANGO</span><span>R$ 14,50</span></div>
+      <div class="salgado-item"><span>HAMBURGAO</span><span>R$ 14,90</span></div>
+      <div class="salgado-item"><span>ESFIHA DE CARNE / FRANGO</span><span>R$ 14,50</span></div>
+      <div class="salgado-item"><span>ENROLADO PRES. E QUEIJO</span><span>R$ 14,50</span></div>
+      <div class="salgado-item"><span>ESPETINHO DE FRANGO</span><span>R$ 14,50</span></div>
+      <div class="salgado-item"><span>PÃO DE QUEIJO</span><span>R$ 9,90</span></div>
+      <div class="salgado-item"><span>PÃO DE BATATA</span><span>R$ 13,60</span></div>
+      <div class="salgado-item"><span>PIZZA PEDAÇO</span><span>R$ 17,75</span></div>
+      <div class="salgado-item"><span>BOLINHO DE AIPIM C/ CARNE</span><span>R$ 14,90</span></div>
+      <div class="salgado-item"><span>COXINHA DE COSTELA</span><span>R$ 13,60</span></div>
+    </div>
+  </div>
+</body>
+</html>
