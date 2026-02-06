@@ -4,122 +4,280 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bebidas e Cafeteria</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
   <style>
+    :root{
+      --bebidas-top: #0c2a72;
+      --bebidas-mid: #081f56;
+      --bebidas-bot: #06163e;
+
+      --cafe-top: #f6d892;
+      --cafe-mid: #e7b85e;
+      --cafe-bot: #c98a2b;
+
+      --cafe-text: #2b1a08;
+      --shadow: 0 10px 26px rgba(0,0,0,.18);
+      --radius: 22px;
+
+      --title-size: 72px;
+      --item-font: 1.55em;
+      --item-padding: 9px 0;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      position: relative;
+      background: radial-gradient(circle at top, #f7f7f7, #e9eef5);
+      overflow-x: hidden;
     }
 
     .container {
       display: flex;
       width: 100%;
-      min-height: 100vh;
-      padding: 20px;
-      box-sizing: border-box;
+      height: 100vh;
+      padding: 24px;
+      gap: 18px;
+      overflow-x: hidden;
     }
 
     #bebidas, #cafeteria {
       width: 50%;
-      padding: 20px 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      padding: 28px 30px 22px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,.08);
+      min-width: 0;
+    }
+
+    #bebidas::before,
+    #cafeteria::before{
+      content:"";
+      position:absolute;
+      top:-55px;
+      left:-30px;
+      right:-30px;
+      height:180px;
+      border-radius: 0 0 110px 110px;
+      opacity:.22;
+      background:#fff;
+      pointer-events:none;
     }
 
     #bebidas {
-      background: linear-gradient(to bottom, #0066cc, #003399);
-      color: white;
-      margin-right: 10px;
+      background: linear-gradient(to bottom, var(--bebidas-top), var(--bebidas-mid) 55%, var(--bebidas-bot));
+      color: #ffffff;
     }
 
     #cafeteria {
-      background: linear-gradient(to bottom, #996633, #663300);
-      color: white;
-      margin-left: 10px;
-      position: relative;
+      background: linear-gradient(to bottom, var(--cafe-top), var(--cafe-mid) 55%, var(--cafe-bot));
+      color: var(--cafe-text);
     }
 
     h2 {
       font-family: 'Lobster', cursive;
-      font-size: 75px;
-      margin-bottom: 30px;
+      font-size: var(--title-size);
+      margin: 0 0 18px;
       text-align: left;
+      line-height: 1;
+      text-shadow: 0 2px 0 rgba(0,0,0,.10);
+      position: relative;
+      z-index: 1;
     }
+
+    #bebidas h2 { color: #eaf1ff; }
+    #cafeteria h2 { color: #3a230d; }
+
+    .scroll-area{
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+      z-index: 1;
+      padding-right: 6px;
+      scrollbar-width: none;
+    }
+    .scroll-area::-webkit-scrollbar{ width: 0; height: 0; }
 
     .bebida-item, .cafe-item {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px dotted rgba(255, 255, 255, 0.6);
-      font-weight: bold;
+      padding: var(--item-padding);
+      font-weight: 800;
       text-transform: uppercase;
-      font-size: 1.5em;
-      letter-spacing: 1px;
+      letter-spacing: .4px;
+      min-width: 0;
+      font-size: var(--item-font);
     }
 
-    .imagem-cafe {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 130px;
-      border-radius: 12px;
+    .bebida-item{ border-bottom: 1px dotted rgba(255, 255, 255, 0.55); }
+    .cafe-item{ border-bottom: 1px dotted rgba(43, 26, 8, 0.35); }
+
+    .bebida-item span:first-child,
+    .cafe-item span:first-child{
+      flex: 1;
+      min-width: 0;
+      padding-right: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .bebida-item span:last-child,
+    .cafe-item span:last-child{
+      font-weight: 900;
+      white-space: nowrap;
+      flex: 0 0 auto;
+      padding-left: 14px;
+    }
+
+    @media (min-width: 1900px) {
+      :root{ --title-size: 92px; --item-font: 1.70em; --item-padding: 10px 0; }
     }
 
     @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-
-      #bebidas, #cafeteria {
-        width: 100%;
-        margin: 10px 0;
-      }
-
-      .imagem-cafe {
-        display: none;
-      }
+      .container { flex-direction: column; height: auto; min-height: 100vh; }
+      #bebidas, #cafeteria { width: 100%; }
+      h2 { font-size: 56px; }
+      :root{ --item-font: 1.15em; }
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <div id="bebidas">
       <h2>Bebidas</h2>
-      <div class="bebida-item"><span>ÁGUA 510 ML</span><span>R$ 5,90</span></div>
-      <div class="bebida-item"><span>ÁGUA 1500 ML</span><span>R$ 11,60</span></div>
-      <div class="bebida-item"><span>ÁGUA COM GÁS 500 ML</span><span>R$ 6,90</span></div>
-      <div class="bebida-item"><span>ÁGUA DE COCO</span><span>R$ 11,90</span></div>
-      <div class="bebida-item"><span>GATORADE</span><span>R$ 13,90</span></div>
-      <div class="bebida-item"><span>H20H1</span><span>R$ 9,60</span></div>
-      <div class="bebida-item"><span>RED BULL 250 ML</span><span>R$ 17,50</span></div>
-      <div class="bebida-item"><span>REFRIGERANTE LATA</span><span>R$ 8,30</span></div>
-      <div class="bebida-item"><span>REFRIGERANTE 600 ML</span><span>R$ 10,90</span></div>
-      <div class="bebida-item"><span>REFRIGERANTE 2000 ML</span><span>R$ 19,60</span></div>
-      <div class="bebida-item"><span>SUCOS</span><span>R$ 15,40</span></div>
-      <div class="bebida-item"><span>SUCOS 2 SABORES</span><span>R$ 18,60</span></div>
-      <div class="bebida-item"><span>SUCO PRAT'S 330 ML</span><span>R$ 10,90</span></div>
-      <div class="bebida-item"><span>SUCO PRAT'S 900 ML</span><span>R$ 19,90</span></div>
-      <div class="bebida-item"><span>SUCO DEL VALLE LATA</span><span>R$ 9,00</span></div>
-      <div class="bebida-item"><span>VITAMINA DE FRUTAS</span><span>R$ 18,60</span></div>
+
+      <div id="bebidasScroll" class="scroll-area">
+        <div class="bebida-item"><span>ÁGUA 510 ML</span><span>R$ 6,50</span></div>
+        <div class="bebida-item"><span>ÁGUA 1500 ML</span><span>R$ 13,90</span></div>
+        <div class="bebida-item"><span>ÁGUA COM GÁS 500 ML</span><span>R$ 6,90</span></div>
+        <div class="bebida-item"><span>ÁGUA DE COCO</span><span>R$ 23,90</span></div>
+        <div class="bebida-item"><span>GATORADE</span><span>R$ 11,99</span></div>
+        <div class="bebida-item"><span>H2OH!</span><span>R$ 10,56</span></div>
+        <div class="bebida-item"><span>RED BULL 250 ML</span><span>R$ 19,25</span></div>
+        <div class="bebida-item"><span>COCA COLA 200 ML</span><span>R$ 6,50</span></div>
+        <div class="bebida-item"><span>REFRIGERANTE LATA</span><span>R$ 9,46</span></div>
+        <div class="bebida-item"><span>REFRIGERANTE 600 ML</span><span>R$ 12,90</span></div>
+        <div class="bebida-item"><span>REFRIGERANTE 1000 ML</span><span>R$ 15,90</span></div>
+        <div class="bebida-item"><span>REFRIGERANTE 2000 ML</span><span>R$ 19,90</span></div>
+        <div class="bebida-item"><span>SUCOS</span><span>R$ 17,60</span></div>
+        <div class="bebida-item"><span>SUCOS 2 SABORES</span><span>R$ 21,89</span></div>
+        <div class="bebida-item"><span>SUCO PRAT'S 330 ML</span><span>R$ 13,90</span></div>
+        <div class="bebida-item"><span>SUCO PRAT'S 900 ML</span><span>R$ 21.89</span></div>
+        <div class="bebida-item"><span>SUCO DEL VALLE LATA</span><span>R$ 10.89</span></div>
+        <div class="bebida-item"><span>VITAMINA DE FRUTAS</span><span>R$ 21,89</span></div>
+      </div>
     </div>
 
     <div id="cafeteria">
       <h2>Cafeteria</h2>
-      <div class="cafe-item"><span>CAFÉ COM LEITE</span><span>R$ 8,60</span></div>
-      <div class="cafe-item"><span>CAFÉ EXPRESSO</span><span>R$ 8,60</span></div>
-      <div class="cafe-item"><span>CAFÉ MÉDIO</span><span>R$ 6,60</span></div>
-      <div class="cafe-item"><span>CAFÉZINHO</span><span>R$ 4,90</span></div>
-      <div class="cafe-item"><span>CAPPUCCINO</span><span>R$ 13,20</span></div>
-      <div class="cafe-item"><span>ACHOCOLATADO</span><span>R$ 11,90</span></div>
-      <div class="cafe-item"><span>BOLO</span><span>R$ 11,60</span></div>
-      <div class="cafe-item"><span>BOLO DE FUBÁ CREMOSO</span><span>R$ 10,90</span></div>
-      <div class="cafe-item"><span>CHANTILLY (ADICIONAL)</span><span>R$ 6,30</span></div>
+
+      <div class="scroll-area">
+        <div class="cafe-item"><span>CAFÉ COM LEITE</span><span>R$ 9,90</span></div>
+        <div class="cafe-item"><span>CAFÉ EXPRESSO</span><span>R$ 8,90</span></div>
+        <div class="cafe-item"><span>CAFÉ MÉDIO</span><span>R$ 6,90</span></div>
+        <div class="cafe-item"><span>CAFÉZINHO</span><span>R$ 4,90</span></div>
+        <div class="cafe-item"><span>CAPPUCCINO</span><span>R$ 13,90</span></div>
+        <div class="cafe-item"><span>ACHOCOLATADO</span><span>R$ 13,90</span></div>
+        <div class="cafe-item"><span>BOLO</span><span>R$ 11,90</span></div>
+        <div class="cafe-item"><span>CHANTILLY (ADICIONAL)</span><span>R$ 6,30</span></div>
+      </div>
     </div>
   </div>
+
+  <script>
+    // Auto-scroll por setInterval (compatível com navegador de TV)
+    // startDelay agora é aplicado:
+    // - no começo
+    // - SEMPRE que voltar para o topo (toda nova descida)
+    function startAutoScrollInterval(area, opts = {}) {
+      const pxPerTick = opts.pxPerTick ?? 4;
+      const intervalMs = opts.intervalMs ?? 20;
+      const startDelay = opts.startDelay ?? 2000; // pausa sempre no topo
+      const pauseEnd = opts.pauseEnd ?? 1000;      // pausa no fim antes de voltar
+      const pauseStart = opts.pauseStart ?? 0;     // pausa extra depois de voltar (opcional)
+
+      let paused = true;        // começa pausado
+      let timerScroll = null;
+      let timerStartDelay = null;
+
+      function isScrollable() {
+        return area.scrollHeight > area.clientHeight + 5;
+      }
+
+      function atEnd() {
+        return area.scrollTop + area.clientHeight >= area.scrollHeight - 2;
+      }
+
+      function scheduleStartDelay() {
+        paused = true;
+        if (timerStartDelay) clearTimeout(timerStartDelay);
+        timerStartDelay = setTimeout(() => {
+          paused = false;
+        }, startDelay);
+      }
+
+      function loop() {
+        if (!isScrollable()) return;
+        if (paused) return;
+
+        area.scrollTop += pxPerTick;
+
+        if (atEnd()) {
+          paused = true;
+
+          setTimeout(() => {
+            area.scrollTop = 0;
+
+            // (opcional) pausa curtinha logo após voltar
+            setTimeout(() => {
+              // aqui entra a pausa PRINCIPAL do topo, SEMPRE
+              scheduleStartDelay();
+            }, pauseStart);
+
+          }, pauseEnd);
+        }
+      }
+
+      // inicia
+      area.scrollTop = 0;
+      scheduleStartDelay(); // aplica a pausa inicial também
+      timerScroll = setInterval(loop, intervalMs);
+
+      window.addEventListener("resize", () => {
+        area.scrollTop = 0;
+        scheduleStartDelay();
+      });
+
+      return () => {
+        clearInterval(timerScroll);
+        if (timerStartDelay) clearTimeout(timerStartDelay);
+      };
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const bebidasArea = document.getElementById("bebidasScroll");
+
+      startAutoScrollInterval(bebidasArea, {
+        pxPerTick: 0.50,       // 2..8 (mais alto = mais rápido)
+        intervalMs: 20,     // 20ms ~ 50fps
+        startDelay: 2000,   // pausa no topo (toda vez que reinicia)
+        pauseEnd: 1000,     // pausa no fim
+        pauseStart: 0       // se quiser uma pausa extra após voltar, coloque 200..500
+      });
+    });
+  </script>
 </body>
 </html>
