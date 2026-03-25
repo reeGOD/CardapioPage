@@ -4,88 +4,171 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lanches e Salgados</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
   <style>
+    :root{
+      --lanche-top: #b21212;
+      --lanche-mid: #961010;
+      --lanche-bot: #730b0b;
+
+      --salgado-top: #f5c36a;
+      --salgado-mid: #e5a74e;
+      --salgado-bot: #cf862e;
+
+      --shadow: 0 10px 26px rgba(0,0,0,.18);
+      --radius: 22px;
+
+      --title-size: 72px;
+      --item-font: 1.45em;
+      --item-padding: 8px 0;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      position: relative;
+      background: radial-gradient(circle at top, #f7f7f7, #e9eef5);
+      overflow-x: hidden;
     }
 
     .container {
       display: flex;
       width: 100%;
-      min-height: 100vh;
-      padding: 20px;
-      box-sizing: border-box;
+      height: 100vh;
+      padding: 24px;
+      gap: 18px;
+      overflow-x: hidden;
     }
 
     #lanches, #salgados {
       width: 50%;
-      padding: 20px 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      padding: 28px 30px 22px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,.08);
+      min-width: 0;
+    }
+
+    #lanches::before,
+    #salgados::before{
+      content:"";
+      position:absolute;
+      top:-55px;
+      left:-30px;
+      right:-30px;
+      height:180px;
+      border-radius: 0 0 110px 110px;
+      opacity:.22;
+      background:#fff;
+      pointer-events:none;
     }
 
     #lanches {
-      background: linear-gradient(to bottom, #cc0000, #990000);
-      color: white;
-      margin-right: 10px;
+      background: linear-gradient(to bottom, var(--lanche-top), var(--lanche-mid) 55%, var(--lanche-bot));
+      color: #ffffff;
     }
 
     #salgados {
-      background: linear-gradient(to bottom, #ffcc33, #ff9900);
-      color: black;
-      margin-left: 10px;
-      position: relative;
+      background: linear-gradient(to bottom, var(--salgado-top), var(--salgado-mid) 55%, var(--salgado-bot));
+      color: #2b1a08;
     }
 
     h2 {
       font-family: 'Lobster', cursive;
-      font-size: 75px;
-      margin-bottom: 30px;
+      font-size: var(--title-size);
+      margin: 0 0 18px;
       text-align: left;
+      line-height: 1;
+      text-shadow: 0 2px 0 rgba(0,0,0,.10);
+      position: relative;
+      z-index: 1;
     }
 
-    .lanche-item, .salgado-item {
+    #lanches h2 { color: #eef3ff; }
+    #salgados h2 { color: #3a230d; }
+
+    .scroll-area{
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+      z-index: 1;
+      padding-right: 6px;
+      scrollbar-width: none;
+    }
+
+    .scroll-area::-webkit-scrollbar{
+      width: 0;
+      height: 0;
+    }
+
+    .menu-item {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px dotted rgba(255, 255, 255, 0.6);
-      font-weight: bold;
+      padding: var(--item-padding);
+      font-weight: 800;
       text-transform: uppercase;
-      font-size: 1.5em;
-      letter-spacing: 1px;
+      letter-spacing: .4px;
+      min-width: 0;
+      font-size: var(--item-font);
     }
 
-    .salgado-item {
-      border-bottom: 1px dotted rgba(0, 0, 0, 0.5);
+    #lanches .menu-item{
+      border-bottom: 1px dotted rgba(255,255,255,.55);
     }
 
-    .imagem-coxinhas {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 130px;
-      border-radius: 12px;
+    #salgados .menu-item{
+      border-bottom: 1px dotted rgba(43,26,8,.35);
+    }
+
+    .menu-item span:first-child{
+      flex: 1;
+      min-width: 0;
+      padding-right: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu-item span:last-child{
+      font-weight: 900;
+      white-space: nowrap;
+      flex: 0 0 auto;
+      padding-left: 14px;
+    }
+
+    @media (min-width: 1900px) {
+      :root{
+        --title-size: 92px;
+        --item-font: 1.65em;
+        --item-padding: 10px 0;
+      }
     }
 
     @media (max-width: 768px) {
       .container {
         flex-direction: column;
+        height: auto;
+        min-height: 100vh;
       }
 
       #lanches, #salgados {
         width: 100%;
-        margin: 10px 0;
       }
 
-      .imagem-coxinhas {
-        display: none;
+      h2 { font-size: 56px; }
+
+      :root{
+        --item-font: 1.15em;
       }
     }
   </style>
@@ -94,44 +177,135 @@
   <div class="container">
     <div id="lanches">
       <h2>Lanches</h2>
-      <div class="lanche-item"><span>AMERICANO</span><span>R$ 41,00</span></div>
-      <div class="lanche-item"><span>AMERICANO FILÉ</span><span>R$ 45,90</span></div>
-      <div class="lanche-item"><span>BAURU</span><span>R$ 31,90</span></div>
-      <div class="lanche-item"><span>BAURU PRESUNTO</span><span>R$ 24,90</span></div>
-      <div class="lanche-item"><span>BAURU FILÉ</span><span>R$ 41,90</span></div>
-      <div class="lanche-item"><span>CHURRASCO</span><span>R$ 30,90</span></div>
-      <div class="lanche-item"><span>CHURRASCO FRANGO</span><span>R$ 30,90</span></div>
-      <div class="lanche-item"><span>CHURRASCO FILÉ</span><span>R$ 41,90</span></div>
-      <div class="lanche-item"><span>FRANGÃO / GIGANTÃO</span><span>R$ 43,90</span></div>
-      <div class="lanche-item"><span>GIGANTÃO FILÉ</span><span>R$ 47,20</span></div>
-      <div class="lanche-item"><span>MISTO QUENTE</span><span>R$ 19,90</span></div>
-      <div class="lanche-item"><span>PÃO COM OVO</span><span>R$ 13,50</span></div>
-      <div class="lanche-item"><span>PÃO NA CHAPA</span><span>R$ 9,40</span></div>
-      <div class="lanche-item"><span>QUEIJO QUENTE</span><span>R$ 18,90</span></div>
-      <div class="lanche-item"><span>X-BURGER</span><span>R$ 29,90</span></div>
-      <div class="lanche-item"><span>X-SALADA</span><span>R$ 31,90</span></div>
-      <div class="lanche-item"><span>X-BACON</span><span>R$ 31,90</span></div>
+
+      <div id="lanchesScroll" class="scroll-area">
+        <div class="menu-item"><span>Americano</span><span>R$ 45,90</span></div>
+        <div class="menu-item"><span>Americano Filé</span><span>R$ 50,90</span></div>
+        <div class="menu-item"><span>Bauru</span><span>R$ 33,90</span></div>
+        <div class="menu-item"><span>Bauru Presunto</span><span>R$ 28,90</span></div>
+        <div class="menu-item"><span>Bauru Filé</span><span>R$ 45,90</span></div>
+        <div class="menu-item"><span>Churrasco</span><span>R$ 32,90</span></div>
+        <div class="menu-item"><span>Churrasco Frango</span><span>R$ 32,90</span></div>
+        <div class="menu-item"><span>Churrasco Filé</span><span>R$ 45,90</span></div>
+        <div class="menu-item"><span>Frangão / Gigantão</span><span>R$ 47,90</span></div>
+        <div class="menu-item"><span>Gigantão Filé</span><span>R$ 53,90</span></div>
+        <div class="menu-item"><span>Misto Quente</span><span>R$ 21,90</span></div>
+        <div class="menu-item"><span>Pão com Ovo</span><span>R$ 15,50</span></div>
+        <div class="menu-item"><span>Pão na Chapa</span><span>R$ 9,90</span></div>
+        <div class="menu-item"><span>Queijo Quente</span><span>R$ 19,90</span></div>
+        <div class="menu-item"><span>X-Burguer</span><span>R$ 33,90</span></div>
+        <div class="menu-item"><span>X-Salada</span><span>R$ 35,90</span></div>
+        <div class="menu-item"><span>X-Bacon</span><span>R$ 35,90</span></div>
+      </div>
     </div>
 
     <div id="salgados">
       <h2>Salgados</h2>
-      <div class="salgado-item"><span>COXINHA FRANGO / CARNE</span><span>R$ 13,60</span></div>
-      <div class="salgado-item"><span>BOLINHO DE CARNE</span><span>R$ 15,60</span></div>
-      <div class="salgado-item"><span>RISOLES DE PRES. E QUEIJO</span><span>R$ 13,60</span></div>
-      <div class="salgado-item"><span>KIBE</span><span>R$ 13,60</span></div>
-      <div class="salgado-item"><span>SALSICHA EMPANADA</span><span>R$ 13,60</span></div>
-      <div class="salgado-item"><span>BOLA DE QUEIJO</span><span>R$ 13,60</span></div>
-      <div class="salgado-item"><span>EMPADA PALMITO/FRANGO</span><span>R$ 14,50</span></div>
-      <div class="salgado-item"><span>HAMBURGAO</span><span>R$ 14,90</span></div>
-      <div class="salgado-item"><span>ESFIHA DE CARNE / FRANGO</span><span>R$ 14,50</span></div>
-      <div class="salgado-item"><span>ENROLADO PRES. E QUEIJO</span><span>R$ 14,50</span></div>
-      <div class="salgado-item"><span>ESPETINHO DE FRANGO</span><span>R$ 14,50</span></div>
-      <div class="salgado-item"><span>PÃO DE QUEIJO</span><span>R$ 9,90</span></div>
-      <div class="salgado-item"><span>PÃO DE BATATA</span><span>R$ 13,60</span></div>
-      <div class="salgado-item"><span>PIZZA PEDAÇO</span><span>R$ 17,75</span></div>
-      <div class="salgado-item"><span>BOLINHO DE AIPIM C/ CARNE</span><span>R$ 14,90</span></div>
-      <div class="salgado-item"><span>COXINHA DE COSTELA</span><span>R$ 13,60</span></div>
+
+      <div id="salgadosScroll" class="scroll-area">
+        <div class="menu-item"><span>Coxinha Frango / Carne</span><span>R$ 14,90</span></div>
+        <div class="menu-item"><span>Bolinho de Carne</span><span>R$ 15,90</span></div>
+        <div class="menu-item"><span>Risoles de Pres. e Queijo</span><span>R$ 14,50</span></div>
+        <div class="menu-item"><span>Kibe</span><span>R$ 14,50</span></div>
+        <div class="menu-item"><span>Salsicha Empanada</span><span>R$ 14,50</span></div>
+        <div class="menu-item"><span>Esfiha de Carne / Frango</span><span>R$ 14,90</span></div>
+        <div class="menu-item"><span>Empada Palmito / Frango</span><span>R$ 14,90</span></div>
+        <div class="menu-item"><span>Hamburgão</span><span>R$ 14,90</span></div>
+        <div class="menu-item"><span>Enrolado de Queijo</span><span>R$ 14,50</span></div>
+        <div class="menu-item"><span>Enrolado Pres. e Queijo</span><span>R$ 14,90</span></div>
+        <div class="menu-item"><span>Espetinho de Frango</span><span>R$ 15,90</span></div>
+        <div class="menu-item"><span>Pão de Queijo</span><span>R$ 9,90</span></div>
+        <div class="menu-item"><span>Pão de Batata</span><span>R$ 14,90</span></div>
+        <div class="menu-item"><span>Pizza Pedaço</span><span>R$ 19,80</span></div>
+        <div class="menu-item"><span>Bolinho de Aipim c/ Carne</span><span>R$ 14,50</span></div>
+        <div class="menu-item"><span>Coxinha de Costela</span><span>R$ 14,50</span></div>
+      </div>
     </div>
   </div>
+
+  <script>
+    function startAutoScrollInterval(area, opts = {}) {
+      const pxPerTick = opts.pxPerTick ?? 0.50;
+      const intervalMs = opts.intervalMs ?? 20;
+      const startDelay = opts.startDelay ?? 2000;
+      const pauseEnd = opts.pauseEnd ?? 1000;
+      const pauseStart = opts.pauseStart ?? 0;
+
+      let paused = true;
+      let timerScroll = null;
+      let timerStartDelay = null;
+
+      function isScrollable() {
+        return area.scrollHeight > area.clientHeight + 5;
+      }
+
+      function atEnd() {
+        return area.scrollTop + area.clientHeight >= area.scrollHeight - 2;
+      }
+
+      function scheduleStartDelay() {
+        paused = true;
+        if (timerStartDelay) clearTimeout(timerStartDelay);
+        timerStartDelay = setTimeout(() => {
+          paused = false;
+        }, startDelay);
+      }
+
+      function loop() {
+        if (!isScrollable()) return;
+        if (paused) return;
+
+        area.scrollTop += pxPerTick;
+
+        if (atEnd()) {
+          paused = true;
+
+          setTimeout(() => {
+            area.scrollTop = 0;
+
+            setTimeout(() => {
+              scheduleStartDelay();
+            }, pauseStart);
+
+          }, pauseEnd);
+        }
+      }
+
+      area.scrollTop = 0;
+      scheduleStartDelay();
+      timerScroll = setInterval(loop, intervalMs);
+
+      window.addEventListener("resize", () => {
+        area.scrollTop = 0;
+        scheduleStartDelay();
+      });
+
+      return () => {
+        clearInterval(timerScroll);
+        if (timerStartDelay) clearTimeout(timerStartDelay);
+      };
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const lanchesArea = document.getElementById("lanchesScroll");
+      const salgadosArea = document.getElementById("salgadosScroll");
+
+      startAutoScrollInterval(lanchesArea, {
+        pxPerTick: 0.50,
+        intervalMs: 20,
+        startDelay: 2000,
+        pauseEnd: 1000,
+        pauseStart: 0
+      });
+
+      startAutoScrollInterval(salgadosArea, {
+        pxPerTick: 0.50,
+        intervalMs: 20,
+        startDelay: 2000,
+        pauseEnd: 1000,
+        pauseStart: 0
+      });
+    });
+  </script>
 </body>
 </html>
